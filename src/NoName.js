@@ -1,5 +1,5 @@
 import React from 'react';
-import Card from './UI/Card';
+import Card from './components/UI/Card';
 
 const NoName = (props) => {
   console.log('NoName Component!');
