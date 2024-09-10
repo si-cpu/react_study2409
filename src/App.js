@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
-import ExpenseItem from './components/Expense/ExpenseItem';
 import Expenses from './components/Expense/Expenses';
-import NoName from './NoName';
 import NewExpense from './components/NewExpense/NewExpense';
 
 function App() {
@@ -14,7 +12,7 @@ function App() {
   ];
 
   // 지출 객체 배열을 상태변수로 관리
-  const [expenseList, setExpenseList] = useState(expenses);
+  const [expenseList, setExpenseList] = useState([]);
 
   // ExpenseForm에게 내려보낼 함수
   const addExpenseHandler = (newEx) => {
