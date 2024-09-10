@@ -1,34 +1,43 @@
 import React, { useState } from 'react';
+import CourseInput from './components/CourseGoal/CourseInput';
+import CourseList from './components/CourseGoal/CourseList';
 import './App.css';
-import Expenses from './components/Expense/Expenses';
-import NewExpense from './components/NewExpense/NewExpense';
 
-function App() {
-  const expenses = [
-    { id: 1, title: '냠냠치킨', price: 19000, date: new Date(2023, 6, 19) },
-    { id: 2, title: '양파', price: 5000, date: new Date(2023, 6, 20) },
-    { id: 3, title: '도미노피자', price: 34000, date: new Date(2024, 6, 19) },
-    { id: 4, title: '노랑통닭', price: 18000, date: new Date(2021, 6, 20) },
-  ];
+const DUMMY_DATA = [
+  {
+    id: 'g1',
+    text: '리액트 컴포넌트 스타일 마스터하기',
+  },
+  {
+    id: 'g2',
+    text: 'UI 프로그래밍 삽고수 되기',
+  },
+];
 
-  // 지출 객체 배열을 상태변수로 관리
-  const [expenseList, setExpenseList] = useState([]);
+const App = () => {
+  const [goals, setGoals] = useState(DUMMY_DATA);
 
-  // ExpenseForm에게 내려보낼 함수
-  const addExpenseHandler = (newEx) => {
-    const modifyEx = {
-      ...newEx,
-      id: expenseList[expenseList.length - 1].id + 1,
-    };
-    setExpenseList([...expenseList, modifyEx]);
-  };
+  // CourseList 조건부 렌더링
+  let listContent = (
+    <p style={{ color: 'red', fontSize: '2em', textAlign: 'center' }}>
+      목표를 등록해 주세요!
+    </p>
+  );
+
+  if (goals.length > 0) {
+    listContent = <CourseList items={goals} />;
+  }
 
   return (
-    <>
-      <NewExpense onAddExpense={addExpenseHandler} />
-      <Expenses expenses={expenseList} />
-    </>
+    <div>
+      <section id='goal-form'>
+        <CourseInput />
+      </section>
+      <section id='goals'>
+        <section id='goals'>{listContent}</section>
+      </section>
+    </div>
   );
-}
+};
 
 export default App;
