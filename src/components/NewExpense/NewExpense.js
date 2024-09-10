@@ -5,7 +5,7 @@ import ExpenseForm from './ExpenseForm';
 const NewExpense = ({ onAddExpense }) => {
   return (
     <div className='new-expense'>
-      <ExpenseForm />
+      <ExpenseForm onSave={onAddExpense} />
     </div>
   );
 };

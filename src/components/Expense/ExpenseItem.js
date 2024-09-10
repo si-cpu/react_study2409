@@ -5,9 +5,9 @@ import Card from '../UI/Card';
 
 // 전달되는 props는 객체로 온다. 디스트럭처링을 통해 쪼개 받을 수 있다.
 const ExpenseItem = ({ title, price, date }) => {
-  // 값이 변경되어서 화면에 반영되어야 하는 값들은
-  // usestate 혹을 통해 상태변수로 관리해야 한다.
-  //(훅: React에서 직접 코드 작성 없이 당얗나 기능을 사용할 수 있게 도와주는 라이브러리)
+  // 값이 변경되어 화면에 반영되어야 하는 값들은
+  // useState 훅을 통해 상태변수로 관리해야 한다.
+  // (훅: React에서 직접 코드 작성 없이 다양한 기능을 사용할 수 있게 도와주는 라이브러리)
 
   // useState(상태변수의 초기값) -> 배열을 리턴합니다.
   // 첫번째 요소는 관리할 상태값
@@ -15,7 +15,7 @@ const ExpenseItem = ({ title, price, date }) => {
   const [itemTitle, setItemTitle] = useState(title);
 
   const clickHandler = () => {
-    // 상태값의 변경은 반드시 SETTER으로만 변경해야 합니다.
+    // 상태값의 변경은 반드시 setter로만 변경해야 합니다.
     setItemTitle('메롱메롱');
   };
 
@@ -31,7 +31,9 @@ const ExpenseItem = ({ title, price, date }) => {
       <button id='btn1' onClick={clickHandler}>
         수정
       </button>
-      <button id='btn2'>삭제</button>
+      <button id='btn2' onClick={() => alert('삭제 버튼 클릭!')}>
+        삭제
+      </button>
     </Card>
   );
 };
