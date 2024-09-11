@@ -16,6 +16,29 @@ const DUMMY_DATA = [
 
 const App = () => {
   const [goals, setGoals] = useState(DUMMY_DATA);
+  //input에게 전달할 함수
+  const addGoalHandler = (text) => {
+    const newGoal = {
+      id: Math.random().toString(), // DB테이블의 PK로 처리가 될 것.
+      text,
+    };
+    // 상태 변수 (배열) 변경
+    setGoals((prevGoals) => [...prevGoals, newGoal]);
+  };
+
+  // 삭제 이벤트 헨들러를 CourseItem까지 내려보내야 함.
+  // 결국 삭제라는 것은 배열의 상태가 변한다는 거고, 그 상태는 APP.js가 관리하는 중.
+  const deleteGoalHandler = (id) => {
+    const updateGoals = [...goals]; // 상태 배열 그대로 복사해서 가져옴.
+    // for (let i = 0; i < updateGoals.length; i++) {
+    //   if (updateGoals[i].id === id) {
+    //     updateGoals.splice(i, 1);
+    //   break;
+    const index = updateGoals.findIndex((goal) => goal.id === id);
+    updateGoals.splice(index, 1);
+
+    setGoals(updateGoals);
+  };
 
   // CourseList 조건부 렌더링
   let listContent = (
@@ -25,13 +48,13 @@ const App = () => {
   );
 
   if (goals.length > 0) {
-    listContent = <CourseList items={goals} />;
+    listContent = <CourseList items={goals} onDelete={deleteGoalHandler} />;
   }
 
   return (
     <div>
       <section id='goal-form'>
-        <CourseInput />
+        <CourseInput onAdd={addGoalHandler} />
       </section>
       <section id='goals'>
         <section id='goals'>{listContent}</section>
